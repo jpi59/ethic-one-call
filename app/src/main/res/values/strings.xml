@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Ethic One Call</string><string name="title">Ethic One Call</string>
+    <string name="subtitle">Lend the phone for one call, not for everything else.</string>
+    <string name="privacy">No permissions. No tracking. Ethic Handoff never reads contacts, calls, messages or files.</string>
+    <string name="choose_app">One Call Mode</string><string name="start">Open Phone</string>
+    <string name="instructions">1. Open Phone. 2. In Recents, choose Pin this app. 3. Hand over the phone. Android will require your PIN or fingerprint to leave Phone.</string>
+    <string name="settings">Open screen-pinning settings</string>
+    <string name="not_enabled">Enable screen pinning in Android Settings, then open Phone and pin it from Recents.</string>
+    <string name="started">Phone opened. Pin it from Recents before handing over the phone.</string>
+</resources>
