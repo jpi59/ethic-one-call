@@ -1,0 +1,10 @@
+Ethic One Call helps you prepare a temporary phone handoff.
+
+It opens Android's Phone app and explains how to enable screen pinning before
+you lend the device. Android protects the exit with the owner's device PIN or
+biometric authentication.
+
+The app requests no contacts, call-log, SMS, accessibility, overlay, or
+network permissions. It does not read or transmit personal data. Android
+requires the owner to enable screen pinning and pin Phone from Recents; a
+regular app cannot silently lock another app on a personal device.
