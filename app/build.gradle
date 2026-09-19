@@ -40,4 +40,8 @@ android {
             if (releaseSigningConfigured) signingConfig signingConfigs.release
         }
     }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
 }
