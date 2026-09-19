@@ -1,18 +1,43 @@
 plugins { id 'com.android.application' }
 import java.util.Properties
+
 def signingProperties = new Properties()
 def signingPropertiesFile = rootProject.file('keystore.properties')
 if (signingPropertiesFile.isFile()) signingPropertiesFile.withInputStream { signingProperties.load(it) }
-def releaseSigningConfigured = ['storeFile', 'storePassword', 'keyAlias', 'keyPassword'].every { signingProperties.getProperty(it)?.trim() }
-android { namespace 'org.jpi59.ethichandoff'; compileSdk 35
-    defaultConfig { applicationId 'org.jpi59.ethichandoff'; minSdk 26; targetSdk 35; versionCode 1; versionName '0.1.0' }
-    signingConfigs { release {
-        if (releaseSigningConfigured) {
-            storeFile rootProject.file(signingProperties.getProperty('storeFile'))
-            storePassword signingProperties.getProperty('storePassword')
-            keyAlias signingProperties.getProperty('keyAlias')
-            keyPassword signingProperties.getProperty('keyPassword')
+
+def releaseKeystorePath = System.getenv('KEYSTORE_PATH') ?: signingProperties.getProperty('storeFile')
+def releaseKeyAlias = System.getenv('KEY_ALIAS') ?: signingProperties.getProperty('keyAlias')
+def releaseStorePassword = System.getenv('STORE_PASSWORD') ?: signingProperties.getProperty('storePassword')
+def releaseKeyPassword = System.getenv('KEY_PASSWORD') ?: signingProperties.getProperty('keyPassword')
+
+def releaseSigningConfigured = [releaseKeystorePath, releaseKeyAlias, releaseStorePassword, releaseKeyPassword].every { it?.trim() }
+
+android {
+    namespace 'org.jpi59.ethichandoff'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'org.jpi59.ethichandoff'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '0.1.0'
+    }
+    signingConfigs {
+        release {
+            if (releaseSigningConfigured) {
+                storeFile file(releaseKeystorePath)
+                storePassword releaseStorePassword
+                keyAlias releaseKeyAlias
+                keyPassword releaseKeyPassword
+            }
         }
-    } }
-    buildTypes { release { minifyEnabled true; shrinkResources true; if (releaseSigningConfigured) signingConfig signingConfigs.release } }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            vcsInfo { include = false }
+            if (releaseSigningConfigured) signingConfig signingConfigs.release
+        }
+    }
 }
