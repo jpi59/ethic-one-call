@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Ethic One Call</string><string name="title">Ethic One Call</string>
     <string name="subtitle">Presta el teléfono para una llamada, no para todo lo demás.</string>
-    <string name="privacy">Sin permisos. Sin rastreo. Ethic Handoff nunca lee contactos, llamadas, mensajes ni archivos.</string>
+    <string name="privacy">Sin permisos. Sin rastreo. Ethic One Call nunca lee contactos, llamadas, mensajes ni archivos.</string>
     <string name="choose_app">Modo una llamada</string><string name="start">Abrir Teléfono</string>
     <string name="instructions">1. Abre Teléfono. 2. En Recientes, elige Fijar esta aplicación. 3. Entrega el teléfono. Android exigirá tu PIN o huella para salir de Teléfono.</string>
     <string name="settings">Abrir ajustes de fijación de pantalla</string>
