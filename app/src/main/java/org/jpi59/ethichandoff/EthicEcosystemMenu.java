@@ -74,19 +74,21 @@ public final class EthicEcosystemMenu {
         iconParams.setMarginEnd(dp(activity, 12));
         header.addView(icon, iconParams);
 
+        AppFont.init(activity);
+
         LinearLayout titleCol = new LinearLayout(activity);
         titleCol.setOrientation(LinearLayout.VERTICAL);
         TextView title = new TextView(activity);
         title.setText(activity.getString(R.string.app_name) + " · v" + getAppVersionName(activity));
         title.setTextSize(18);
-        title.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        title.setTypeface(AppFont.bold());
         title.setTextColor(ink);
         titleCol.addView(title);
 
         TextView badge = new TextView(activity);
         badge.setText(R.string.one_call_badge);
         badge.setTextSize(12);
-        badge.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        badge.setTypeface(AppFont.medium());
         badge.setTextColor(action);
         titleCol.addView(badge);
         header.addView(titleCol);
@@ -137,13 +139,14 @@ public final class EthicEcosystemMenu {
             TextView appNameView = new TextView(activity);
             appNameView.setText(name);
             appNameView.setTextSize(15);
-            appNameView.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+            appNameView.setTypeface(AppFont.semibold());
             appNameView.setTextColor(ink);
             textCol.addView(appNameView);
 
             TextView appDescView = new TextView(activity);
             appDescView.setText(desc);
             appDescView.setTextSize(12);
+            appDescView.setTypeface(AppFont.regular());
             appDescView.setTextColor(muted);
             textCol.addView(appDescView);
 
@@ -153,7 +156,7 @@ public final class EthicEcosystemMenu {
             actionBtn.setText(isInstalled ? R.string.app_open : R.string.app_view);
             actionBtn.setTextSize(13);
             actionBtn.setAllCaps(false);
-            actionBtn.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+            actionBtn.setTypeface(AppFont.semibold());
             if (isInstalled) {
                 actionBtn.setTextColor(Color.WHITE);
                 actionBtn.setBackground(roundedBackground(action, action, 14, activity.getResources().getDisplayMetrics().density));
@@ -213,7 +216,7 @@ public final class EthicEcosystemMenu {
         LinearLayout techCard = createCardLayout(activity, dialogSurface, cardStroke);
         techCard.addView(createKeyValueRow(activity, activity.getString(R.string.package_id_label), activity.getPackageName(), ink, muted));
         techCard.addView(createDivider(activity, cardStroke));
-        techCard.addView(createKeyValueRow(activity, activity.getString(R.string.key_fingerprint_label), getSigningCertificateSha256(activity), ink, muted));
+        techCard.addView(createKeyValueRow(activity, activity.getString(R.string.key_fingerprint_label), getSignerFingerprintSha256(activity), ink, muted));
         root.addView(techCard);
 
         ScrollView scroll = new ScrollView(activity);
@@ -232,7 +235,7 @@ public final class EthicEcosystemMenu {
         if (doneBtn != null) {
             doneBtn.setTextColor(action);
             doneBtn.setTextSize(16);
-            doneBtn.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+            doneBtn.setTypeface(AppFont.bold());
         }
     }
 
@@ -247,7 +250,9 @@ public final class EthicEcosystemMenu {
                         "This program is distributed in the hope that it will be useful, " +
                         "but WITHOUT ANY WARRANTY; without even the implied warranty of " +
                         "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the " +
-                        "GNU General Public License for more details.")
+                        "GNU General Public License for more details.\n\n" +
+                        "You should have received a copy of the GNU General Public License " +
+                        "along with this program. If not, see <https://www.gnu.org/licenses/>.")
                 .setPositiveButton(R.string.done, null)
                 .create();
         d.show();
@@ -255,36 +260,41 @@ public final class EthicEcosystemMenu {
             d.getWindow().setBackgroundDrawable(new ColorDrawable(surface));
         }
         Button b = d.getButton(AlertDialog.BUTTON_POSITIVE);
-        if (b != null) b.setTextColor(action);
-    }
-
-    public static String getAppVersionName(Context context) {
-        try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (Exception ignored) {
-            return "1.0.0";
+        if (b != null) {
+            b.setTextColor(action);
+            b.setTextSize(16);
+            b.setTypeface(AppFont.bold());
         }
     }
 
-    public static String getSigningCertificateSha256(Context context) {
+    private static String getAppVersionName(Context ctx) {
         try {
-            Signature[] signatures;
+            return ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            return "0.1.1";
+        }
+    }
+
+    private static String getSignerFingerprintSha256(Context ctx) {
+        try {
+            PackageManager pm = ctx.getPackageManager();
+            Signature[] signatures = null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                PackageInfo pi = context.getPackageManager().getPackageInfo(
-                        context.getPackageName(), PackageManager.GET_SIGNING_CERTIFICATES);
-                SigningInfo si = pi.signingInfo;
-                signatures = (si != null) ? (si.hasMultipleSigners() ? si.getApkContentsSigners() : si.getSigningCertificateHistory()) : null;
+                SigningInfo si = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_SIGNING_CERTIFICATES).signingInfo;
+                if (si != null) {
+                    signatures = si.hasMultipleSigners() ? si.getApkContentsSigners() : si.getSigningCertificateHistory();
+                }
             } else {
-                PackageInfo pi = context.getPackageManager().getPackageInfo(
-                        context.getPackageName(), PackageManager.GET_SIGNATURES);
+                PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_SIGNATURES);
                 signatures = pi.signatures;
             }
             if (signatures != null && signatures.length > 0) {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
                 byte[] digest = md.digest(signatures[0].toByteArray());
                 StringBuilder sb = new StringBuilder();
-                for (byte b : digest) {
-                    sb.append(String.format("%02x", b));
+                for (int i = 0; i < digest.length; i++) {
+                    sb.append(String.format("%02X", digest[i]));
+                    if (i < digest.length - 1) sb.append(":");
                 }
                 return sb.toString();
             }
@@ -296,7 +306,7 @@ public final class EthicEcosystemMenu {
         TextView tv = new TextView(ctx);
         tv.setText(text.toUpperCase(Locale.ROOT));
         tv.setTextSize(12);
-        tv.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        tv.setTypeface(AppFont.bold());
         tv.setTextColor(color);
         tv.setLetterSpacing(0.08f);
         tv.setPadding(0, dp(ctx, 14), 0, dp(ctx, 6));
@@ -350,7 +360,7 @@ public final class EthicEcosystemMenu {
         TextView tvTitle = new TextView(ctx);
         tvTitle.setText(title);
         tvTitle.setTextSize(15);
-        tvTitle.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        tvTitle.setTypeface(AppFont.semibold());
         tvTitle.setTextColor(ink);
         textCol.addView(tvTitle);
 
@@ -358,6 +368,7 @@ public final class EthicEcosystemMenu {
             TextView tvDesc = new TextView(ctx);
             tvDesc.setText(desc);
             tvDesc.setTextSize(12);
+            tvDesc.setTypeface(AppFont.regular());
             tvDesc.setTextColor(muted);
             textCol.addView(tvDesc);
         }
@@ -386,14 +397,14 @@ public final class EthicEcosystemMenu {
         TextView tvKey = new TextView(ctx);
         tvKey.setText(key);
         tvKey.setTextSize(12);
-        tvKey.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        tvKey.setTypeface(AppFont.semibold());
         tvKey.setTextColor(muted);
         row.addView(tvKey);
 
         TextView tvVal = new TextView(ctx);
         tvVal.setText(value);
         tvVal.setTextSize(13);
-        tvVal.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        tvVal.setTypeface(AppFont.regular());
         tvVal.setTextColor(ink);
         row.addView(tvVal);
         return row;

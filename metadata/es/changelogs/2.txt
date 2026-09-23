@@ -1,0 +1,1 @@
+Marcador kiosco seguro, sandbox biométrico, overlay en llamada, teclado DTMF.

@@ -1,12 +1,52 @@
 <resources>
-    <string name="app_name">Ethic One Call</string><string name="title">Ethic One Call</string>
+    <string name="app_name">Ethic One Call</string>
+    <string name="title">Ethic One Call</string>
     <string name="subtitle">Presta el teléfono para una llamada, no para todo lo demás.</string>
-    <string name="privacy">Sin permisos. Sin rastreo. Ethic One Call nunca lee contactos, llamadas, mensajes ni archivos.</string>
-    <string name="choose_app">Modo una llamada</string><string name="start">Abrir Teléfono</string>
-    <string name="instructions">1. Abre Teléfono. 2. En Recientes, elige Fijar esta aplicación. 3. Entrega el teléfono. Android exigirá tu PIN o huella para salir de Teléfono.</string>
-    <string name="settings">Abrir ajustes de fijación de pantalla</string>
-    <string name="not_enabled">Activa la fijación de pantalla en Ajustes de Android; después abre Teléfono y fíjalo desde Recientes.</string>
-    <string name="started">Teléfono abierto. Fíjalo desde Recientes antes de entregar el teléfono.</string>
+    <string name="privacy">Sin rastreo. Sin acceso a datos. Ethic One Call nunca lee contactos, registros, mensajes ni archivos.</string>
+
+    <!-- Acciones y Modo -->
+    <string name="action_lend_phone">Prestar celular</string>
+    <string name="mode_active_title">Ethic One Call Activo</string>
+    <string name="mode_active_subtitle">Celular bloqueado únicamente para llamar. Sin acceso a fotos ni otras apps.</string>
+
+    <!-- Instrucciones -->
+    <string name="instructions_title">Modo seguro para prestar el celular</string>
+    <string name="instructions_body">1. Toca «Prestar celular» y autentica con tu huella o PIN.\n2. El celular quedará bloqueado de forma segura en este teclado de marcación.\n3. Entrega el teléfono para que hagan la llamada.\n4. Al recibirlo, autentica para recuperar el control.</string>
+
+    <!-- Teclado de marcación -->
+    <string name="dial_hint">Ingresa el número</string>
+    <string name="call_action">Llamar</string>
+    <string name="clear_action">Borrar</string>
+    <string name="action_reclaim_phone">Finalizar préstamo</string>
+    <string name="reclaim_desc">Autenticación del propietario para finalizar préstamo</string>
+    <string name="call_empty_number">Por favor ingresa un número de teléfono para llamar.</string>
+    <string name="locked_notice">Ethic One Call está activo. Toca «Finalizar préstamo» para salir.</string>
+
+    <!-- Pantalla Durante la Llamada -->
+    <string name="incall_title">Ethic One Call</string>
+    <string name="incall_calling">Llamando…</string>
+    <string name="incall_in_call">Llamada en curso</string>
+    <string name="incall_ended">Llamada finalizada</string>
+    <string name="incall_audio_hint">Audio por auricular · Acerca el celular al oído para hablar</string>
+    <string name="action_mute">Silenciar</string>
+    <string name="action_mute_on">Silenciado</string>
+    <string name="action_keypad">Teclado</string>
+    <string name="action_hide_keypad">Ocultar teclado</string>
+    <string name="action_end_call">Colgar llamada</string>
+
+    <!-- Seguridad y Permisos -->
+    <string name="auth_start_title">Autenticar para prestar celular</string>
+    <string name="auth_start_subtitle">Usa tu huella, rostro o PIN para bloquear el celular en modo llamada.</string>
+    <string name="auth_exit_title">Finalizar préstamo</string>
+    <string name="auth_exit_subtitle">Usa tu huella, rostro o PIN para volver a tu celular.</string>
+    <string name="secure_device_required">Por favor configura un bloqueo de pantalla (PIN, patrón o huella) en los Ajustes de Android primero.</string>
+    <string name="lock_task_not_supported">La fijación de pantalla no está disponible en este dispositivo.</string>
+    <string name="permissions_missing">Se requieren permisos telefónicos y de gestión de llamada para realizar y controlar la llamada de forma segura mientras el celular está bloqueado.</string>
+    <string name="overlay_permission_title">Pantalla de llamada protegida</string>
+    <string name="overlay_permission_message">Para mantener la llamada dentro de Ethic One Call y evitar que se abra tu app de teléfono privada, permite «Aparecer encima».</string>
+    <string name="action_configure">Configurar</string>
+    <string name="service_notification_title">Ethic One Call — Llamada protegida</string>
+    <string name="service_notification_text">Modo transitorio activo · Celular protegido</string>
 
     <!-- Menú y Proyectos -->
     <string name="menu_title">Acerca de nosotros</string>

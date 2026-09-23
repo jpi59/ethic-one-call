@@ -1,0 +1,19 @@
+Ethic One Call ayuda al dueño del teléfono a preparar un préstamo temporal
+para una sola llamada.
+
+El propietario se autentica con huella o PIN y el teléfono entra en un modo
+kiosco seguro con un teclado de marcación bloqueado. El invitado solo puede
+marcar y realizar una llamada telefónica. Durante la llamada, una pantalla
+sandbox a pantalla completa impide el acceso al marcador nativo, los contactos
+o cualquier otra aplicación. Cuando el teléfono es devuelto, el propietario se
+autentica de nuevo para salir y recuperar el control total.
+
+Privacidad y seguridad:
+• Sin acceso a contactos, registro de llamadas, SMS ni archivos.
+• Sin permiso de red — completamente offline.
+• Sin rastreo, sin analíticas, sin servicios de terceros.
+• Autenticación biométrica o PIN para entrar y salir del modo préstamo.
+• Sandbox durante la llamada con silencio, teclado DTMF y temporizador.
+
+El ícono de este repositorio es un vector original creado para este proyecto.
+Licencia GPL-3.0-or-later.

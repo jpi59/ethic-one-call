@@ -1,12 +1,52 @@
 <resources>
-    <string name="app_name">Ethic One Call</string><string name="title">Ethic One Call</string>
+    <string name="app_name">Ethic One Call</string>
+    <string name="title">Ethic One Call</string>
     <string name="subtitle">Lend the phone for one call, not for everything else.</string>
-    <string name="privacy">No permissions. No tracking. Ethic One Call never reads contacts, calls, messages or files.</string>
-    <string name="choose_app">One Call Mode</string><string name="start">Open Phone</string>
-    <string name="instructions">1. Open Phone. 2. In Recents, choose Pin this app. 3. Hand over the phone. Android will require your PIN or fingerprint to leave Phone.</string>
-    <string name="settings">Open screen-pinning settings</string>
-    <string name="not_enabled">Enable screen pinning in Android Settings, then open Phone and pin it from Recents.</string>
-    <string name="started">Phone opened. Pin it from Recents before handing over the phone.</string>
+    <string name="privacy">No tracking. Zero data access. Ethic One Call never reads contacts, logs, messages, or files.</string>
+
+    <!-- Actions & Mode -->
+    <string name="action_lend_phone">Lend Phone</string>
+    <string name="mode_active_title">Ethic One Call Active</string>
+    <string name="mode_active_subtitle">Phone locked strictly for calling. No access to photos or other apps.</string>
+
+    <!-- Instructions -->
+    <string name="instructions_title">Secure phone lending mode</string>
+    <string name="instructions_body">1. Tap \"Lend Phone\" and authenticate with your fingerprint or PIN.\n2. The phone will be safely locked on the dialer keypad.\n3. Hand over the phone for the person to make their call.\n4. When returned, authenticate to exit and reclaim control.</string>
+
+    <!-- Dialer Keypad -->
+    <string name="dial_hint">Enter number</string>
+    <string name="call_action">Call</string>
+    <string name="clear_action">Delete</string>
+    <string name="action_reclaim_phone">End lending</string>
+    <string name="reclaim_desc">Owner authentication required to end lending</string>
+    <string name="call_empty_number">Please enter a phone number to call.</string>
+    <string name="locked_notice">Ethic One Call is active. Tap \"End lending\" to exit.</string>
+
+    <!-- In-Call Screen -->
+    <string name="incall_title">Ethic One Call</string>
+    <string name="incall_calling">Calling…</string>
+    <string name="incall_in_call">Call in progress</string>
+    <string name="incall_ended">Call ended</string>
+    <string name="incall_audio_hint">Audio through earpiece · Bring phone to ear to talk</string>
+    <string name="action_mute">Mute</string>
+    <string name="action_mute_on">Muted</string>
+    <string name="action_keypad">Keypad</string>
+    <string name="action_hide_keypad">Hide keypad</string>
+    <string name="action_end_call">End Call</string>
+
+    <!-- Security & Permissions -->
+    <string name="auth_start_title">Authenticate to lend phone</string>
+    <string name="auth_start_subtitle">Use your fingerprint, face, or PIN to lock the phone into call mode.</string>
+    <string name="auth_exit_title">End lending session</string>
+    <string name="auth_exit_subtitle">Use your fingerprint, face, or PIN to reclaim your phone.</string>
+    <string name="secure_device_required">Please configure a screen lock (PIN, pattern, or fingerprint) in Android Settings first.</string>
+    <string name="lock_task_not_supported">Screen pinning / lock mode is not supported on this device.</string>
+    <string name="permissions_missing">Phone and call management permissions are required to place and control the call securely while locked.</string>
+    <string name="overlay_permission_title">Protected call sandbox</string>
+    <string name="overlay_permission_message">To keep calls strictly inside Ethic One Call and prevent opening your private phone app, please allow «Display over other apps».</string>
+    <string name="action_configure">Configure</string>
+    <string name="service_notification_title">Ethic One Call — Protected Call</string>
+    <string name="service_notification_text">Transitory mode active · Phone secured</string>
 
     <!-- Menu & Projects -->
     <string name="menu_title">About us</string>
